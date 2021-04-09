@@ -1,0 +1,346 @@
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# Review of the study "Integrative single-cell analysis of transcriptional and epigenetic states in the human adult brain" by Lake, B., Chen, S., Sos, B. *et al.*
+
+## Initializing libraries
+
+```{r}
+library(tidyverse)
+library(SingleCellExperiment)
+library(Matrix)
+library(AnnotationHub)
+library(ensembldb)
+library(ggplot2)
+library(scales)
+library(Seurat)
+```
+
+## Creating Seurat Objects of all the samples
+
+```{r}
+
+counts <- read.table(file = "countmatrices/out_SRR5904942_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s42<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904943_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s43<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904944_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s44<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904945_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s45<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904946_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s46<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904947_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s47<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904948_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s48<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904949_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s49<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904950_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s50<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904951_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s51<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904952_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s52<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904953_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s53<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904954_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s54<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904955_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s55<- CreateSeuratObject(counts=counts, project = "Visual_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904956_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s56<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904957_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s57<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904958_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s58<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904959_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s59<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904960_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s60<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904961_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s61<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904962_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s62<- CreateSeuratObject(counts=counts, project = "Frontal_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904963_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s63<- CreateSeuratObject(counts=counts, project = "Frontal_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904964_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s64<- CreateSeuratObject(counts=counts, project = "Frontal_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904965_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s65<- CreateSeuratObject(counts=counts, project = "Frontal_Cortex")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904966_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s66<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904967_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s67<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904968_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s68<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+
+counts <- read.table(file = "countmatrices/out_SRR5904969_gene_exon_tagged.dge.txt", header = TRUE, row.names = 1, colClasses =c("character", rep("numeric", 2500)))
+s69<- CreateSeuratObject(counts=counts, project = "Cerebellar_Hemisphere")
+rm(counts)
+```
+
+## Merging all the samples into a single Seurat Object
+
+```{r}
+so.merged <- merge(s42, y = c(s43, s44, s45, s46, s47, s48, s49, s50, s51, s52, s53, s54, s55, s56, s57, s58, s59, s60, s61, s62, s63, s64, s65, s66, s67, s68, s69), 
+add.cell.ids = c("s42","s43","s44","s45","s46","s47","s48","s49","s50","s51","s52","s53","s54","s55","s56","s57","s58","s59","s60","s61","s62","s63","s64","s65","s66","s67","s68","s69"))
+
+```
+
+## Free individual samples memory
+
+```{r}
+rm(s42,s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,s62,s63,s64,s65,s66,s67,s68,s69)
+```
+
+# Quality Control
+
+```{r}
+mito.genes <- grep(pattern = "^MT-", x = rownames(so.merged@assays[["RNA"]]), value = TRUE)
+
+percent.mito <- Matrix::colSums(so.merged@assays[["RNA"]][mito.genes, ])/Matrix::colSums(so.merged@assays[["RNA"]])
+
+# AddMetaData adds columns to object@meta.data, and is a great place to
+# stash QC stats
+
+#Seurat v2 function, but shows compatibility in Seurat v3
+so.merged <- AddMetaData(object = so.merged, metadata = percent.mito, col.name = "percent.mito") 
+#in case the above function does not work simply do:
+so.merged$percent.mito <- percent.mito
+
+```
+
+## Violin Plot
+
+```{r}
+
+VlnPlot(object = so.merged, features = c("nFeature_RNA", "nCount_RNA", "percent.mito"), ncol = 3)
+
+```
+
+```{r}
+
+par(mfrow = c(1, 2))
+FeatureScatter(object = so.merged, feature1 = "nCount_RNA", feature2 = "percent.mito")
+
+```
+
+```{r}
+
+FeatureScatter(object = so.merged, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
+```
+
+```{r}
+
+# We filter out cells that have unique gene counts (nFeature_RNA) over 2,500 or less than
+# 200 Note that > and < are used to define a'gate'.  
+#-Inf and Inf should be used if you don't want a lower or upper threshold.
+so.merged <- subset(x = so.merged, subset = nFeature_RNA > 300 & nFeature_RNA < 5000 & percent.mito >  -Inf & percent.mito < 0.05 )
+```
+
+## Normalize the data
+
+```{r}
+
+VlnPlot(object = so.merged, features = c("nFeature_RNA", "nCount_RNA", "percent.mito"), ncol = 3)
+
+```
+
+```{r}
+so.merged <- NormalizeData(object = so.merged, normalization.method = "LogNormalize")
+```
+
+## Violin plot
+
+```{r}
+VlnPlot(so.merged, features = c("nFeature_RNA", "nCount_RNA"), ncol = 2)
+```
+
+## Scatter Plot
+
+```{r}
+scatterplot <- FeatureScatter(so.merged, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
+scatterplot
+```
+
+## Find variable genes
+
+```{r}
+rm(scatterplot)
+so.merged <- FindVariableFeatures(so.merged, selection.method = "vst", nfeatures = 2000)
+
+# Identify the 10 most highly variable genes
+top10 <- head(VariableFeatures(so.merged), 10)
+
+# plot variable features with and without labels
+plot1 <- VariableFeaturePlot(so.merged)
+plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
+plot1
+```
+
+## Scale data
+
+```{r}
+all.genes <- rownames(so.merged)
+so.merged <- ScaleData(so.merged, vars.to.regress = c("nCounts_RNA", "percent.mito"))
+```
+
+```{r}
+so.merged
+```
+
+## Run PCA
+
+```{r}
+so.merged <- RunPCA(object = so.merged, pc.genes = so.merged@var.genes, do.print = TRUE, pcs.print = 1:150, genes.print = 5)
+```
+
+## PCA Plot
+
+```{r}
+DimPlot(object = so.merged, reduction = "pca")
+
+```
+
+## Variable feature plot
+
+```{r}
+VariableFeaturePlot(object = so.merged)
+
+```
+
+## Heatmap
+
+```{r}
+DimHeatmap(object = so.merged, reduction = "pca", cells = 200, balanced = TRUE)
+```
+
+## Elbow Plot
+
+```{r}
+ElbowPlot(object = so.merged)
+```
+
+## Nearest Neighbors
+
+```{r}
+so.merged <- FindNeighbors(so.merged, reduction = "pca", dims = 1:15)
+```
+
+## Find clusters
+
+```{r}
+so.merged <- FindClusters(so.merged, resolution = 0.5, algorithm = 1)
+```
+
+## Run TSNE
+
+```{r}
+so.merged <- RunTSNE(object = so.merged, dims.use = 1:15, do.fast = TRUE, check_duplicates = FALSE)
+
+```
+
+```{r}
+TSNEPlot(object = so.merged)
+```
+
+## TSNE by tissue type
+
+```{r}
+DimPlot(so.merged, reduction = "tsne", group.by = "orig.ident" )
+```
+
+## UMAP 20 PCs
+
+```{r}
+# Run UMAP map on first 20 PCs
+so.merged <- RunUMAP(object = so.merged, dims = 1:20)
+# Plot results
+DimPlot(object = so.merged, reduction = 'umap')
+```
+
+## UMAP by tissue
+
+```{r}
+DimPlot(object = so.merged, reduction = 'umap', group.by = "orig.ident")
+```
+
+## Feature Plot
+
+```{r}
+
+FeaturePlot(object = so.merged, features = c("CHN1"), cols = c("grey", "blue"), reduction = "umap", pt.size = 0.1)
+```
+
+```{r}
+
+FeaturePlot(object = so.merged, features = c("CREG2"), cols = c("grey", "blue"), reduction = "umap", pt.size = 0.1)
+
+
+```
+
+```{r}
+
+FeaturePlot(object = so.merged, features = c("TFAP2B"), cols = c("grey", "blue"), reduction = "umap", pt.size = 0.1)
+
+```
+
+```{r}
+
+FeaturePlot(object = so.merged, features = c("GRID2"), cols = c("grey", "blue"), reduction = "umap", pt.size = 0.1)
+```
